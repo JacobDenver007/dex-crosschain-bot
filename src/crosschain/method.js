@@ -1,5 +1,7 @@
 const BufferParser = require("../utils/buffer");
 const axios = require("axios");
+const fs = require('fs')
+
 const {
     FORCE_BRIDGER_SERVER_URL,
     DAI_TOKEN_ADDRESS,
@@ -144,6 +146,23 @@ const getBurnStatus = async (ckb_burn_tx_hash) => {
             console.log("burn ",ckb_burn_tx_hash," retry : ", i," ckb_to_eth_status : ",res.data.status)
             if ( res.data.status === 'success'){
                 console.log(ckb_burn_tx_hash,"burn success")
+                break
+            }
+            if (i >= 20) {
+                fs.readFile('~/.force-bridge/logs/ckb-tx-relayer.log', 'utf8', (err, data) => {
+                    if (err) {
+                        console.error(err)
+                        return
+                      }
+                      console.log(data)
+                })
+                fs.readFile('~/.force-bridge/logs/eth-indexer.log', 'utf8', (err, data) => {
+                    if (err) {
+                        console.error(err)
+                        return
+                      }
+                      console.log(data)
+                })
                 break
             }
         }catch (err){
