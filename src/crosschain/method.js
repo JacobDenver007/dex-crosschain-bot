@@ -126,6 +126,23 @@ const getLockStatus = async (ethLockTxHash) => {
                 console.log(ethLockTxHash,"mint success")
                 break
             }
+            if (i >= 20) {
+                fs.readFile('/home/runner/work/force-bridge-eth/eth-tx-relayer.log', 'utf8', (err, data) => {
+                    if (err) {
+                        console.error(err)
+                        return
+                      }
+                      console.log(data)
+                })
+                fs.readFile('/home/runner/work/force-bridge-eth/ckb-indexer.log', 'utf8', (err, data) => {
+                    if (err) {
+                        console.error(err)
+                        return
+                      }
+                      console.log(data)
+                })
+                break
+            }
         }catch (err){
             console.error("failed get_eth_to_ckb_status of lock ", ethLockTxHash," error : ",err.response.data)
             // break;
