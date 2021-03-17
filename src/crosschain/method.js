@@ -149,14 +149,14 @@ const getBurnStatus = async (ckb_burn_tx_hash) => {
                 break
             }
             if (i >= 20) {
-                fs.readFile('~/.force-bridge/logs/ckb-tx-relayer.log', 'utf8', (err, data) => {
+                fs.readFile('/home/runner/work/force-bridge-eth/ckb-tx-relayer.log', 'utf8', (err, data) => {
                     if (err) {
                         console.error(err)
                         return
                       }
                       console.log(data)
                 })
-                fs.readFile('~/.force-bridge/logs/eth-indexer.log', 'utf8', (err, data) => {
+                fs.readFile('/home/runner/work/force-bridge-eth/eth-indexer.log', 'utf8', (err, data) => {
                     if (err) {
                         console.error(err)
                         return
